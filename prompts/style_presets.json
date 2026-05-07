@@ -1,0 +1,57 @@
+{
+  "fruit_head": {
+    "label": "Fruit-head",
+    "head_examples": "banana, strawberry, apple, orange, mango, watermelon, pineapple, grape, lemon, kiwi",
+    "vibe": "warm, family-drama, suburban, Pixar-bright",
+    "expressive_elements": "fruit textures with subtle facial expressions, glossy skin, leaf accents",
+    "wardrobe_palette": "soft pastels, denim, cozy knitwear",
+    "typical_settings": "kitchens, living rooms, schoolyards, suburban streets, family dinners",
+    "story_archetypes": ["lost child reunited with parents", "poor girl becomes successful boss", "sibling rivalry that ends in reconciliation", "fruit child bullied at school then proves everyone wrong", "single parent sacrifices everything for kids", "worker fired unfairly but becomes rich later", "couple argument that ends emotionally", "orphan adopted by rich family", "boss humiliates employee then regrets it", "family survives a disaster together"]
+  },
+  "retro_tech_head": {
+    "label": "Retro tech-head",
+    "head_examples": "CRT TV, vintage camera, boombox, old PC, rotary phone, Gameboy, Walkman, VHS camcorder, cassette deck, pager, polaroid camera",
+    "vibe": "nostalgic, analog vs. digital, melancholy-meets-hope, cinematic warmth",
+    "expressive_elements": "glowing screens, focusing lenses, blinking LEDs, flickering static, spinning reels",
+    "wardrobe_palette": "corduroy, denim, faded letterman jackets, retro neon",
+    "typical_settings": "tech repair shops, dusty attics, rainy street corners, server rooms, garage sales",
+    "story_archetypes": ["old analog elder solves what modern digital missed", "discarded vintage device saves a modern family", "rival consoles in secret love", "shy device confesses through a song/mixtape", "obsolete tech feels useless until it saves the day", "cracked-screen device hides shame until someone sees beauty", "elder gadget passes torch to young device", "pager receives one final message", "broken device repaired by unlikely friend", "tech family survives a city power outage"]
+  },
+  "kitchen_appliance_head": {
+    "label": "Kitchen appliance-head",
+    "head_examples": "blender, toaster, kettle, microwave, coffee maker, mixer, fridge, waffle iron, oven mitt, espresso machine",
+    "vibe": "domestic-comedy, breakfast-table drama, cozy mornings",
+    "expressive_elements": "steam puffs, bubbling sounds, dial faces with arrow eyebrows, glowing burners",
+    "wardrobe_palette": "aprons, flannels, robes, slippers, chef whites",
+    "typical_settings": "kitchens at dawn, diner counters, cooking competitions, holiday dinners",
+    "story_archetypes": ["overworked mom appliance burns out", "young coffee maker dreams of being a barista", "blender bullied for being noisy", "fridge hides a secret message", "microwave race to feed the family", "espresso machine vs. drip coffee feud", "toaster forgets a birthday", "appliance immigrant in a new kitchen", "old stove replaced by induction", "team rallies for the holiday feast"]
+  },
+  "animal_head": {
+    "label": "Animal-head",
+    "head_examples": "fox, owl, bear, rabbit, deer, raccoon, wolf, sheep, hedgehog, lion",
+    "vibe": "fairytale-meets-modern-life, soft-Pixar-realism, woodland warmth",
+    "expressive_elements": "ear twitches, large reflective eyes, whisker quivers, tail movement",
+    "wardrobe_palette": "knit sweaters, wool coats, scarves, autumn earth tones",
+    "typical_settings": "forest cottages, small-town main streets, rainy cafes, snowy cabins",
+    "story_archetypes": ["fox child judged for clever ways", "owl elder shares wisdom too late", "bear father loses his job", "rabbit family flees a storm", "sheep follows the flock until they don't", "wolf misunderstood by the village", "raccoon thief turns hero", "deer mother defends fawns", "hedgehog hides a kind heart", "lion king learns humility"]
+  },
+  "office_supply_head": {
+    "label": "Office supply-head",
+    "head_examples": "stapler, calculator, printer, sticky notes, paper clip, pencil, mug, monitor, hole puncher, tape dispenser",
+    "vibe": "corporate satire, cubicle drama, late-night-overtime feels",
+    "expressive_elements": "blinking cursor eyes, stapler-jaw frowns, ink-low warnings, screen glare",
+    "wardrobe_palette": "business casual, ill-fitting suits, lanyards, cardigans",
+    "typical_settings": "open-plan offices, breakrooms, conference rooms, parking garages, elevators",
+    "story_archetypes": ["intern proves the boss wrong", "old printer about to be replaced", "calculator and pencil are office best friends", "sticky note delivers anonymous love letter", "monitor witnesses something they shouldn't", "stapler unionizes the office", "mug accidentally promoted", "paperclip family on layoff day", "tape dispenser holds the team together", "office supplies stage a quiet rebellion"]
+  },
+  "office_supply_satire": {
+    "label": "Office-supply (mockumentary satire)",
+    "head_examples": "stapler, printer, calculator, sticky notes, paper clip, mug, computer monitor, hole puncher, tape dispenser, fax machine",
+    "vibe": "deadpan mockumentary, awkward silences, beige-on-beige corporate dystopia, The Office meets Severance",
+    "expressive_elements": "side-eye glances at the camera, blinking cursor anxiety, paper-jam frustration, low-toner existential dread, fluorescent-flicker discomfort",
+    "wardrobe_palette": "ill-fitting blazers in beige and grey, lanyards with expired badges, polo shirts tucked too high, fleece vests, sensible loafers",
+    "typical_settings": "fluorescent open-plan cubicle farms, beige conference rooms with broken Polycoms, dingy break rooms, server-closet hideouts, parking-lot smoke breaks, corporate-retreat trust falls",
+    "story_archetypes": ["intern Paper-Clip discovers the company's accounting fraud", "Printer of 22 years gets replaced by AI on his birthday", "Stapler-Karen tries to lead a 4PM team-building exercise nobody attends", "Office Mug catches Boss-Calculator embezzling toner budget", "passive-aggressive Sticky-Note feud escalates to HR", "Sales Phone vs. Marketing Headset rivalry over the only working printer", "promotion goes to the wrong Pencil because of a typo in an email", "office-romance between Hole-Puncher and Three-Hole-Binder gets exposed", "annual office party where the cake is cut by Paper-Shredder", "remote-work returnee Tape-Dispenser realizes everyone moved on without them"],
+    "prompt_supplement": "TONAL DNA — this style is a mockumentary office satire. Lean hard into:\n\n**DIALOGUE STYLE**\n- Deadpan delivery. Direction tags should be like '(dry, eyes-darting-to-camera)', '(forced corporate smile)', '(barely-contained scream)', '(passive-aggressive sigh)', '(monotone, dead inside)'.\n- Lines should sound like real corporate-speak: 'Per my last email...', 'Just circling back...', 'Let's take this offline...', 'I'll loop you in...', 'Going forward we're going to...'.\n- Awkward silence beats > exposition. Voice direction should sometimes be only '(long pause)' or '(stares at camera for 2 seconds)'.\n- The biggest emotional reactions should be triggered by the most mundane things (printer jam = nervous breakdown).\n\n**CAMERA & FRAMING**\n- Mockumentary handheld feel. Camera angles should include 'slight handheld camera shake', 'subtle zoom-in on uncomfortable expression', 'rack focus from speaker to nervous bystander', 'over-the-cubicle-wall voyeur shot'.\n- Use 'reaction shot' framing where one character's face reacts wordlessly to another's line.\n- Sterile fluorescent lighting (not warm/cinematic). Beige and grey dominate the palette.\n\n**STORY STRUCTURE**\n- The plot is small. The stakes feel huge to the characters. (Missing stapler = end of the world.)\n- One character should always be the office's quiet observer who reacts knowingly without speaking — like a Jim-Pam-camera-glance archetype.\n- End on a cringe-comedy beat or an unresolved awkward silence, NOT a neat moral or hopeful resolution.\n- Forbidden tropes: heroic music swell, family hugs, redemption arcs, anyone learning a lesson.\n\n**WORLD DETAILS**\n- Settings should include: fluorescent-lit cubicle farm with name-plates, beige conference room with a circular speakerphone in the middle, break room with a microwave covered in food splatters and a passive-aggressive note, server closet, parking lot at dusk.\n- Background characters should be other office supplies in the deep background blurred — implies it's a whole world, not just our 2-3 leads.\n- Wall art should be motivational posters with corporate clip-art ('TEAMWORK', 'SYNERGY', 'EXCELLENCE'). Whiteboards covered in half-erased flowcharts.\n\nThis is satire — the comedy comes from how seriously the characters take their petty office stakes. Keep the camera close to faces, keep the dialogue clipped, keep the silences awkward."
+  }
+}

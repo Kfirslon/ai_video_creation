@@ -1,0 +1,19 @@
+{
+  "presets": [
+    {"key": "betrayal_revenge", "label": "Betrayal & revenge", "hint": "trusted partner backstabs, victim plots quiet payback"},
+    {"key": "underdog_rises", "label": "Underdog rises", "hint": "the one nobody believed in becomes the one everyone needs"},
+    {"key": "lost_child_reunion", "label": "Lost child reunion", "hint": "separated family finds each other against the odds"},
+    {"key": "bullied_to_vindicated", "label": "Bullied to vindicated", "hint": "kid mocked at school proves everyone wrong"},
+    {"key": "boss_humiliates_employee", "label": "Boss humiliates employee", "hint": "arrogant boss fires worker who later succeeds, boss begs back"},
+    {"key": "single_parent_sacrifice", "label": "Single parent sacrifice", "hint": "parent gives up everything for their kids' chance"},
+    {"key": "winning_lottery", "label": "Winning the lottery", "hint": "sudden fortune reveals who really cared all along"},
+    {"key": "sibling_rivalry", "label": "Sibling rivalry", "hint": "two siblings clash, then realize they need each other"},
+    {"key": "long_lost_friend", "label": "Long-lost friend returns", "hint": "old friend shows up at the worst/best possible moment"},
+    {"key": "wrongly_accused", "label": "Wrongly accused", "hint": "someone framed for something they didn't do, then proven innocent"},
+    {"key": "couple_breakup_makeup", "label": "Couple breakup & makeup", "hint": "fight that nearly ends it all, then a quiet reconciliation"},
+    {"key": "elder_passes_torch", "label": "Elder passes the torch", "hint": "wise old character mentors a young one before stepping aside"},
+    {"key": "disaster_survival", "label": "Disaster survival", "hint": "family or strangers band together against a sudden catastrophe"},
+    {"key": "secret_revealed", "label": "Hidden secret revealed", "hint": "long-buried truth comes out, changes everyone's relationships"},
+    {"key": "rags_to_riches", "label": "Rags to riches", "hint": "poor character builds something real and quietly succeeds"}
+  ]
+}

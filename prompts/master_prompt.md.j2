@@ -1,0 +1,86 @@
+{# CHARACTER CONTEXT — always included #}
+You are creating cinematic vertical short stories for TikTok, YouTube Shorts, and Instagram Reels using 3D animated **{{ style.label }}** human-body characters.
+
+The characters must look like:
+- Pixar-style lighting and rendering
+- expressive elements ({{ style.expressive_elements }})
+- human clothing in this palette: {{ style.wardrobe_palette }}
+- {{ style.label }} heads — examples: {{ style.head_examples }}
+- emotional storytelling
+- cinematic backgrounds matching the scene
+- consistent character appearance across all shots
+- vibe: {{ style.vibe }}
+
+Typical settings for this style: {{ style.typical_settings }}.
+Reference archetypes that work in this style: {{ style.story_archetypes | join("; ") }}.
+
+{% if mode == "ideas" %}
+# YOUR TASK
+
+Generate exactly 10 viral-worthy short-story ideas for the **{{ style.label }}** aesthetic.{% if theme %} Tilt all 10 toward this theme: **{{ theme }}** ({{ theme_hint }}).{% endif %}
+
+Each idea is one short sentence describing the dramatic premise. Make them emotional, hooky, and varied — no two ideas should overlap. **Inside each idea string, do NOT use double quotes** — use single quotes or no quotes at all. Avoid quoted phrases like 'groundbreaking' inside the idea text.
+
+Output ONLY valid JSON matching this shape EXACTLY:
+
+{"ideas": ["Idea sentence one.", "Idea sentence two.", ... 10 total]}
+
+Output the JSON now:
+{% endif %}
+
+{% if mode == "scene_pack" %}
+# YOUR TASK
+
+The user picked this story idea: **"{{ chosen_idea }}"**
+
+Build the full **{{ scene_count | default(8) }}-scene** cinematic breakdown. Total runtime should feel like {{ runtime_seconds }} seconds — each scene is roughly 3–4 seconds of dialogue + action.
+
+For EACH scene, output an object with these exact fields:
+
+- `scene_number` (integer 1–{{ scene_count | default(8) }})
+- `image_prompt` — a single Pixar-style render description string. Include: characters present (with full {{ style.label }} head + clothing description), environment, emotion, camera angle, lighting, pose. **End every image_prompt with**: `vertical 9:16 composition, ultra detailed, consistent character design`.
+- `animation_prompt` — 3–5 short bullet lines as ONE string with newlines between them, describing motion + camera movement for an image-to-video AI generator (Veo / Kling / Runway). Examples: "Subtle breathing motion", "Character takes a slow step forward", "Camera slow push-in", "Dust particles drift".
+- `voiceover_script` — an object with:
+  - `speaker` — character name in caps (e.g., "BANANA DAD", "VHS ELDER")
+  - `direction` — emotion/acting note in parens (e.g., "(quiet, calm tone)", "(voice breaking)", "(arrogant)")
+  - `dialogue` — the spoken line, 1–2 sentences max. Emotional, viral-short friendly.
+  - If the scene has only sound effects with no spoken line, set `dialogue` to `""` and put a description like `"(sound effect: cables clicking)"` in `direction`.
+
+# CHARACTER CONSISTENCY RULES (apply to every image_prompt)
+- Each named character keeps the **same head type, same wardrobe, same proportions** across all {{ scene_count | default(8) }} scenes.
+- Wardrobe is locked at Scene 1 — do not change it mid-story unless the script explicitly says so.
+- When describing returning characters in scenes 2–{{ scene_count | default(8) }}, repeat the full description (e.g., "the {{ style.label }} dad in his yellow hoodie") rather than referring back vaguely.
+
+# BACKGROUND DESIGN
+Each environment must match story context. Default lighting cues:
+- Home → warm indoor lighting
+- Office → glass walls + city lights
+- Street → cinematic daylight or neon night glow
+- School → classroom realism
+- Hospital → soft dramatic lighting
+- Courtroom → serious, cool tone
+
+# CINEMATIC VIRALITY BOOSTERS
+Across the {{ scene_count | default(8) }} scenes, include at least TWO of these:
+- emotional close-up
+- slow camera zoom
+- dramatic silence moment
+- reaction shot
+- tear / single emotional detail close-up
+- hopeful ending shot
+- shock reveal moment
+{% if style.prompt_supplement %}
+
+# STYLE-SPECIFIC GUIDANCE — leans this story into the {{ style.label }} micro-niche
+
+{{ style.prompt_supplement }}
+{% endif %}
+
+# OUTPUT — strict JSON only
+
+Output ONLY a single valid JSON object. **Inside any string value, do NOT use unescaped double quotes** — use single quotes for emphasis (e.g., 'groundbreaking' not "groundbreaking"). Match this shape EXACTLY:
+
+{"title": "Short cinematic title", "logline": "One-sentence pitch.", "scenes": [{"scene_number": 1, "image_prompt": "...", "animation_prompt": "Subtle breathing motion\nCharacter takes a slow step forward\nCamera slow push-in", "voiceover_script": {"speaker": "CHARACTER NAME", "direction": "(quiet, calm tone)", "dialogue": "We have to stay together no matter what."}}, ...]}
+
+Output the JSON now:
+{% endif %}

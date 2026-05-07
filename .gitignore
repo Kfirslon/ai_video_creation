@@ -1,0 +1,26 @@
+# Secrets
+.env
+.env.local
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Generated user content (per-project outputs)
+projects/*
+!projects/.gitkeep
+
+# User-uploaded music
+library/music/*
+!library/music/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
