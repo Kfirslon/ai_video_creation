@@ -111,7 +111,18 @@ async function loadStyles() {
   $("#theme").addEventListener("input", e => state.theme = e.target.value);
   $("#runtime").addEventListener("input", e => state.runtime = parseInt(e.target.value || "25", 10));
   const sc = $("#scene-count");
-  if (sc) sc.addEventListener("change", e => state.sceneCount = parseInt(e.target.value, 10));
+  if (sc) {
+    sc.addEventListener("change", e => {
+      state.sceneCount = parseInt(e.target.value, 10);
+      updateSceneCountLabels();
+    });
+  }
+  updateSceneCountLabels();
+}
+
+function updateSceneCountLabels() {
+  // Keep any "8 images / 8 videos" copy in sync with what the user actually picked.
+  $$("[data-scene-count]").forEach(el => { el.textContent = String(state.sceneCount); });
 }
 
 async function loadThemes() {
@@ -281,6 +292,9 @@ async function pickIdea(idea) {
 function renderPack() {
   $("#pack-meta").innerHTML = `<strong>${state.pack.title}</strong> — ${state.pack.logline || ""}`;
   $("#pack-pre").textContent = JSON.stringify(state.pack, null, 2);
+  // The pack's scene_count is authoritative — sync labels in case backend differs.
+  if (state.pack.scene_count) state.sceneCount = state.pack.scene_count;
+  updateSceneCountLabels();
 }
 
 $("#btn-images").addEventListener("click", async () => {

@@ -585,6 +585,14 @@ button.cta-large:hover {
   border-color: rgba(87, 227, 137, 0.35);
   background: rgba(87, 227, 137, 0.05);
 }
+/* Visited steps are clickable — give them a clear hover state so users know they can jump back. */
+#stepper li.clickable { cursor: pointer; }
+#stepper li.clickable:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+  background: rgba(255, 46, 147, 0.08);
+  transform: translateY(-1px);
+}
 
 @keyframes pulse-bg {
   0%, 100% { opacity: 0.06; }
