@@ -564,14 +564,30 @@ async function loadDemo() {
   } catch {
     return;
   }
-  // Pick a hero video — prefer the polished final reel, fall back to the first scene clip
+  // Hero: prefer a real demo video (finals first, then scene clips). Fall back to a
+  // crossfade slideshow of the demo images inside the phone frame so the hero still
+  // feels alive on deployments where we couldn't bundle a video (HF blocks binary mp4s).
   const heroSrc =
     (manifest.finals && manifest.finals[0]) ||
     (manifest.scene_videos && manifest.scene_videos[0]);
+  const v = $("#hero-demo");
+  const slides = $("#phone-slides");
   if (heroSrc) {
-    const v = $("#hero-demo");
     v.src = heroSrc;
-    v.play().catch(() => {/* autoplay can fail until user interacts; that's fine */});
+    v.play().catch(() => {/* autoplay may fail until user interacts; harmless */});
+  } else if (slides && manifest.images && manifest.images.length) {
+    v.hidden = true;
+    slides.hidden = false;
+    slides.innerHTML = manifest.images.map((src, i) =>
+      `<img src="${src}" alt="" class="${i === 0 ? "on" : ""}" loading="lazy">`
+    ).join("");
+    const imgs = [...slides.querySelectorAll("img")];
+    let idx = 0;
+    setInterval(() => {
+      imgs[idx].classList.remove("on");
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add("on");
+    }, 2200);
   }
 
   // Marquee — duplicate the strip so the loop is seamless
