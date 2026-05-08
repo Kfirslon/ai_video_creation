@@ -41,7 +41,7 @@ app = FastAPI(title="AI Viral Shorts Generator")
 # is low. The expensive *generation* endpoints (/api/ideas, /api/scene_pack, /api/images/start,
 # /api/assemble, /api/auth) stay gated.
 _AUTH_EXEMPT_PATHS = {"/", "/api/health", "/api/auth", "/favicon.ico"}
-_AUTH_EXEMPT_PREFIXES = ("/static/", "/demo/", "/files/", "/api/music/")
+_AUTH_EXEMPT_PREFIXES = ("/static/", "/demo/", "/files/", "/api/music/", "/api/download_zip/")
 
 
 class PasswordGateMiddleware(BaseHTTPMiddleware):
@@ -196,12 +196,15 @@ def index() -> HTMLResponse:
 @app.get("/api/health")
 def health() -> dict:
     """Return which providers are configured. UI shows this as a status banner."""
+    # SPACE_ID is set by HF Spaces; PORT=7860 is also a strong hint we're in the container.
+    is_hosted = bool(os.getenv("SPACE_ID")) or os.getenv("PORT") == "7860"
     return {
         "text_provider": text_client.active_provider(),
         "image_provider": f"gemini ({image_client.active_model()})" if config.GEMINI_API_KEY else "none — set GEMINI_API_KEY",
         "groq_configured": bool(config.GROQ_API_KEY),
         "gemini_configured": bool(config.GEMINI_API_KEY),
         "password_required": bool(config.APP_PASSWORD),
+        "is_hosted": is_hosted,
     }
 
 

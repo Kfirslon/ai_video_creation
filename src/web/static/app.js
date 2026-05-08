@@ -630,6 +630,10 @@ async function loadHealth() {
   el.innerHTML =
     `text: <span class="${textCls}">${escapeHtml(h.text_provider)}</span> · ` +
     `image: <span class="${imgCls}">${escapeHtml(h.image_provider)}</span>`;
+  // Hide local-only buttons (Open project folder) when running on a hosted deploy.
+  if (h.is_hosted) {
+    document.body.classList.add("is-hosted");
+  }
   return h;
 }
 

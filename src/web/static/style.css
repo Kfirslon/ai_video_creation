@@ -602,6 +602,9 @@ button.cta-large:hover {
   border-color: rgba(87, 227, 137, 0.35);
   background: rgba(87, 227, 137, 0.05);
 }
+/* Hosted deploys can't open a server-side folder in the user's file manager. */
+body.is-hosted #btn-open-folder { display: none; }
+
 /* Visited steps are clickable — give them a clear hover state so users know they can jump back. */
 #stepper li.clickable { cursor: pointer; }
 #stepper li.clickable:hover {
