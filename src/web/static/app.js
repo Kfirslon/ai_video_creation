@@ -485,6 +485,61 @@ function escapeHtml(s) {
 
 $("#btn-to-assemble").addEventListener("click", () => show("step-assemble"));
 
+// --- Auto-mode (paid: Kie.ai Veo 3 Fast) ---
+
+$("#btn-auto-videos")?.addEventListener("click", async () => {
+  const n = state.pack?.scene_count || state.sceneCount || 8;
+  const estCost = (n * 0.80).toFixed(2);
+  if (!confirm(
+    `Auto-generate ${n} videos via Kie.ai Veo 3 Fast?\n\n` +
+    `Estimated cost: $${estCost} (charged to your Kie.ai account)\n` +
+    `Time: ~3-6 min total\n\n` +
+    `Continue?`
+  )) return;
+
+  const btn = $("#btn-auto-videos");
+  btn.disabled = true;
+  btn.textContent = "Generating…";
+  $("#auto-progress").hidden = false;
+  $("#auto-progress").max = n;
+  try {
+    await api("/api/videos/auto_start", {
+      method: "POST",
+      body: JSON.stringify({ slug: state.slug }),
+    });
+    pollAutoVideos();
+  } catch (e) {
+    showError(e.message);
+    btn.disabled = false;
+    btn.textContent = `Auto-generate all ${n} →`;
+  }
+});
+
+async function pollAutoVideos() {
+  const tick = async () => {
+    const job = await api(`/api/job/${state.slug}`);
+    if (job.total) $("#auto-progress").max = job.total;
+    if (job.progress != null) $("#auto-progress").value = job.progress;
+    $("#auto-status").textContent = job.status || "";
+    // Refresh the scene cards so generated videos start showing
+    await renderScenes();
+
+    if (job.status === "error") {
+      $("#auto-status").innerHTML = `<span style="color:var(--bad)">Error: ${escapeHtml(job.error || "")}</span>`;
+      $("#btn-auto-videos").disabled = false;
+      $("#btn-auto-videos").textContent = "Retry auto-generate";
+      return;
+    }
+    if (job.status === "done") {
+      $("#auto-status").innerHTML = `<span style="color:var(--good)">All scenes generated! Continue to assemble →</span>`;
+      $("#btn-to-assemble").hidden = false;
+      return;
+    }
+    setTimeout(tick, 2500);
+  };
+  tick();
+}
+
 // --- Step 6: assemble ---
 
 $("#btn-assemble").addEventListener("click", async () => {
@@ -673,6 +728,14 @@ async function loadHealth() {
   // Hide local-only buttons (Open project folder) when running on a hosted deploy.
   if (h.is_hosted) {
     document.body.classList.add("is-hosted");
+  }
+  // Reveal the auto-mode panel in step 5 only if the server has a Kie.ai key + public URL.
+  if (h.auto_mode_available) {
+    document.body.classList.add("auto-mode-on");
+    const panel = $("#auto-mode-panel");
+    const provEl = $("#auto-mode-provider");
+    if (panel) panel.hidden = false;
+    if (provEl && h.auto_mode_provider) provEl.textContent = "via " + h.auto_mode_provider;
   }
   return h;
 }

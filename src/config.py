@@ -31,6 +31,23 @@ UI_PORT = int(os.getenv("UI_PORT", "5173"))
 # Optional shared password for public deploys (HF Spaces). Empty = no auth (local mode).
 APP_PASSWORD = os.getenv("APP_PASSWORD", "").strip()
 
+# Auto-mode: paid Veo 3 video generation via Kie.ai. Empty = manual paste flow.
+KIE_AI_API_KEY = os.getenv("KIE_AI_API_KEY", "").strip()
+KIE_AI_BASE_URL = os.getenv("KIE_AI_BASE_URL", "https://api.kie.ai").rstrip("/")
+KIE_AI_MODEL = os.getenv("KIE_AI_MODEL", "veo3_fast")  # cheapest tier; 'veo3' for higher quality
+
+# Public base URL of this app (so Kie.ai can fetch the scene images we send it).
+# On HF Spaces we can derive it from SPACE_ID; locally it's not reachable from external services.
+def public_base_url() -> str:
+    explicit = os.getenv("PUBLIC_BASE_URL", "").rstrip("/")
+    if explicit:
+        return explicit
+    space_id = os.getenv("SPACE_ID", "").strip()
+    if space_id and "/" in space_id:
+        owner, name = space_id.split("/", 1)
+        return f"https://{owner.lower()}-{name.lower()}.hf.space"
+    return ""
+
 PROMPTS_DIR = ROOT / "prompts"
 PROJECTS_DIR = ROOT / "projects"
 MUSIC_DIR = ROOT / "library" / "music"

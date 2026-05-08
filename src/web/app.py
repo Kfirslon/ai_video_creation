@@ -23,8 +23,8 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from .. import config, image_client, text_client
-from ..pipeline import assemble, images, metadata, scene_pack, story
+from .. import config, image_client, text_client, video_client
+from ..pipeline import assemble, auto_videos, images, metadata, scene_pack, story
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger("viralshorts")
@@ -198,6 +198,7 @@ def health() -> dict:
     """Return which providers are configured. UI shows this as a status banner."""
     # SPACE_ID is set by HF Spaces; PORT=7860 is also a strong hint we're in the container.
     is_hosted = bool(os.getenv("SPACE_ID")) or os.getenv("PORT") == "7860"
+    auto_mode = video_client.is_configured() and bool(config.public_base_url())
     return {
         "text_provider": text_client.active_provider(),
         "image_provider": f"gemini ({image_client.active_model()})" if config.GEMINI_API_KEY else "none — set GEMINI_API_KEY",
@@ -205,6 +206,8 @@ def health() -> dict:
         "gemini_configured": bool(config.GEMINI_API_KEY),
         "password_required": bool(config.APP_PASSWORD),
         "is_hosted": is_hosted,
+        "auto_mode_available": auto_mode,
+        "auto_mode_provider": f"kie.ai ({config.KIE_AI_MODEL})" if auto_mode else None,
     }
 
 
@@ -445,6 +448,41 @@ async def upload_video(slug: str = Form(...), scene: int = Form(...), file: Uplo
         state["stage"] = "ready_to_assemble"
     _save_state(slug, state)
     return {"ok": True, "videos_done": state["videos_done"], "scene_count": expected}
+
+
+def _auto_videos_worker(slug: str) -> None:
+    """Background worker: generate every scene video via Kie.ai Veo 3 Fast."""
+    proj = config.project_dir(slug)
+    try:
+        pack = json.loads((proj / "scene_pack.json").read_text(encoding="utf-8"))
+        n = len(pack["scenes"])
+        _job_set(slug, stage="auto_videos", progress=0, total=n, status="starting auto-mode")
+
+        def progress(done: int, total: int, status: str) -> None:
+            _job_set(slug, stage="auto_videos", progress=done, total=total, status=status)
+
+        auto_videos.generate_all(pack, proj, progress=progress)
+
+        # Update state.videos_done so the UI stepper unlocks the assemble step
+        state = _load_state(slug)
+        state["videos_done"] = list(range(1, n + 1))
+        state["stage"] = "ready_to_assemble"
+        _save_state(slug, state)
+        _job_set(slug, stage="auto_videos", status="done", error=None)
+    except Exception as e:
+        _job_set(slug, stage="auto_videos", status="error", error=str(e))
+
+
+@app.post("/api/videos/auto_start")
+def start_auto_videos(payload: dict) -> dict:
+    """Kick off auto-mode video generation. Requires KIE_AI_API_KEY + public base URL."""
+    if not video_client.is_configured():
+        raise HTTPException(400, "Auto-mode is not configured (KIE_AI_API_KEY missing)")
+    if not config.public_base_url():
+        raise HTTPException(400, "PUBLIC_BASE_URL not set and SPACE_ID not detected — cannot share images with Kie.ai")
+    slug = payload["slug"]
+    threading.Thread(target=_auto_videos_worker, args=(slug,), daemon=True).start()
+    return {"started": True}
 
 
 def _assemble_worker(slug: str, music_filename: str | None) -> None:

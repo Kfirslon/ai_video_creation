@@ -204,8 +204,20 @@
     </section>
 
     <section id="step-videos" class="step">
-      <h2>5. Generate the <span data-scene-count>8</span> videos in Google Flow</h2>
-      <p class="hint">For each scene: copy the prompt, paste into <a href="https://labs.google/flow" target="_blank">Google Flow</a> with the image, download the mp4, drop it in.</p>
+      <h2>5. Generate the <span data-scene-count>8</span> videos</h2>
+
+      <div id="auto-mode-panel" class="auto-mode-panel" hidden>
+        <div>
+          <strong>⚡ Auto-mode available</strong>
+          <span id="auto-mode-provider" class="hint"></span>
+          <p class="hint">Skip the manual paste loop. Generates every scene via Veo 3 Fast (~$0.80/clip on Kie.ai). Cost shown before you commit.</p>
+        </div>
+        <button id="btn-auto-videos" class="cta-large">Auto-generate all <span data-scene-count>8</span> →</button>
+      </div>
+
+      <p class="hint manual-mode-hint">For each scene: copy the prompt, paste into <a href="https://labs.google/flow" target="_blank">Google Flow</a> with the image, download the mp4, drop it in.</p>
+      <progress id="auto-progress" value="0" max="8" hidden></progress>
+      <p id="auto-status" class="hint"></p>
       <div id="scenes-list"></div>
       <button id="btn-to-assemble" hidden>All <span data-scene-count>8</span> done — continue →</button>
     </section>
@@ -219,21 +231,36 @@
 
       <audio id="music-preview" controls hidden style="width:100%;margin-top:8px"></audio>
 
+      <div class="music-find-panel">
+        <h4>Need a track? Pick a vibe and grab one in 2 clicks:</h4>
+        <div class="vibe-chips">
+          <a class="vibe-chip" target="_blank" rel="noopener" href="https://pixabay.com/music/search/sad%20piano/">😢 Sad piano</a>
+          <a class="vibe-chip" target="_blank" rel="noopener" href="https://pixabay.com/music/search/emotional%20cinematic/">🎬 Cinematic</a>
+          <a class="vibe-chip" target="_blank" rel="noopener" href="https://pixabay.com/music/search/lofi%20chill/">😌 Lo-fi chill</a>
+          <a class="vibe-chip" target="_blank" rel="noopener" href="https://pixabay.com/music/search/uplifting/">✨ Uplifting</a>
+          <a class="vibe-chip" target="_blank" rel="noopener" href="https://pixabay.com/music/search/dramatic/">⚡ Dramatic</a>
+          <a class="vibe-chip" target="_blank" rel="noopener" href="https://pixabay.com/music/search/tense%20suspense/">😬 Tense</a>
+          <a class="vibe-chip" target="_blank" rel="noopener" href="https://pixabay.com/music/search/hopeful/">🌅 Hopeful</a>
+          <a class="vibe-chip" target="_blank" rel="noopener" href="https://pixabay.com/music/search/epic%20orchestral/">🎺 Epic</a>
+        </div>
+        <p class="hint">All Pixabay music is free + royalty-free. Click a vibe → click any track → click <em>Download</em> → drop the .mp3 below. Pixabay is the cleanest source — most TikTok creators use it because it doesn't trip copyright detection.</p>
+      </div>
+
       <div class="music-drop" id="music-drop">
-        <strong>Drop a music file here</strong>
-        <span>.mp3, .wav, or .m4a — adds to your library</span>
+        <strong>⬆ Drop your .mp3 here</strong>
+        <span>or click to browse — adds to your library</span>
       </div>
 
       <details class="free-music-help">
-        <summary>Where to get free, viral-style background music ↓</summary>
+        <summary>More free music sources ↓</summary>
         <ul>
-          <li><a href="https://www.tiktok.com/business/en/inspiration/music" target="_blank" rel="noopener">TikTok Commercial Music Library</a> — free for non-commercial use, the source of most viral track sounds</li>
-          <li><a href="https://pixabay.com/music/" target="_blank" rel="noopener">Pixabay Music</a> — large CC0 royalty-free library, no signup, direct mp3 downloads</li>
-          <li><a href="https://www.youtube.com/audiolibrary" target="_blank" rel="noopener">YouTube Audio Library</a> — Google's own free pack, mood/genre filters</li>
-          <li><a href="https://uppbeat.io/" target="_blank" rel="noopener">Uppbeat</a> — free with attribution, premium tier optional</li>
-          <li><a href="https://freemusicarchive.org/" target="_blank" rel="noopener">Free Music Archive</a> — Creative Commons hand-curated tracks</li>
+          <li><a href="https://pixabay.com/music/" target="_blank" rel="noopener">Pixabay Music</a> — biggest CC0 library, direct mp3 downloads, no signup ⭐</li>
+          <li><a href="https://www.youtube.com/audiolibrary" target="_blank" rel="noopener">YouTube Audio Library</a> — Google's free pack, mood/genre filters</li>
+          <li><a href="https://www.tiktok.com/business/en/inspiration/music" target="_blank" rel="noopener">TikTok Commercial Music Library</a> — built for the TikTok algorithm</li>
+          <li><a href="https://uppbeat.io/" target="_blank" rel="noopener">Uppbeat</a> — free with attribution; premium tier optional</li>
+          <li><a href="https://freemusicarchive.org/" target="_blank" rel="noopener">Free Music Archive</a> — hand-curated CC tracks</li>
         </ul>
-        <p class="hint">Tip: search <em>"cinematic sad piano"</em>, <em>"emotional ambient"</em>, or <em>"slow lo-fi"</em> on any of these to match the AI-character-drama vibe. Avoid copyrighted hits — TikTok will mute the audio.</p>
+        <p class="hint">Avoid copyrighted hits — TikTok will mute the audio or shadowban the post.</p>
       </details>
 
       <p class="hint">Music auto-ducks under dialogue: dialogue boosted +5dB, music compressed to -20dB whenever someone speaks.</p>

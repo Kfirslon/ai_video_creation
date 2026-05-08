@@ -636,6 +636,62 @@ button.cta-large:hover {
 /* Hosted deploys can't open a server-side folder in the user's file manager. */
 body.is-hosted #btn-open-folder { display: none; }
 
+/* When auto-mode is on, demote the "manual paste" hint so the auto button is the obvious action. */
+body.auto-mode-on .manual-mode-hint { opacity: 0.55; font-size: 12.5px; margin-top: 18px; }
+
+/* Auto-mode promo panel (step 5) */
+.auto-mode-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 46, 147, 0.08), rgba(0, 240, 255, 0.06)),
+    var(--panel-strong);
+  border: 1px solid rgba(255, 46, 147, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 0 28px rgba(255, 46, 147, 0.08);
+}
+.auto-mode-panel strong { color: var(--accent); font-size: 15px; }
+.auto-mode-panel #auto-mode-provider { margin-left: 8px; font-size: 12px; color: var(--muted); }
+.auto-mode-panel p { margin: 6px 0 0; }
+
+/* Music "find more" vibe chips */
+.music-find-panel {
+  margin: 14px 0 18px;
+  padding: 18px 20px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.music-find-panel h4 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg);
+}
+.vibe-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.vibe-chip {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s, background 0.15s;
+}
+.vibe-chip:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: rgba(255, 46, 147, 0.1);
+}
+
 /* Visited steps are clickable — give them a clear hover state so users know they can jump back. */
 #stepper li.clickable { cursor: pointer; }
 #stepper li.clickable:hover {
