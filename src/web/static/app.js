@@ -621,6 +621,46 @@ function revealGenerator() {
 }
 
 $("#btn-get-started")?.addEventListener("click", revealGenerator);
+$("#btn-header-cta")?.addEventListener("click", revealGenerator);
+$("#btn-final-cta")?.addEventListener("click", revealGenerator);
+
+async function loadCast() {
+  // Pull the same style presets the form uses, render as a hover-reveal grid.
+  let styles;
+  try { styles = await api("/api/styles"); }
+  catch { return; }
+  const grid = $("#cast-grid");
+  if (!grid) return;
+  grid.innerHTML = Object.entries(styles).map(([key, s]) => {
+    const heads = (s.head_examples || "").split(",").map(x => x.trim()).filter(Boolean).slice(0, 3).join(" · ");
+    const archetype = (s.story_archetypes || [])[0] || "";
+    return `
+      <button type="button" class="cast-card" data-style="${escapeHtml(key)}">
+        <span class="cast-label">${escapeHtml(s.label || key)}</span>
+        <span class="cast-heads">${escapeHtml(heads)}</span>
+        <span class="cast-hover">
+          <strong>Vibe</strong>
+          <span>${escapeHtml(s.vibe || "")}</span>
+          <strong>Story like</strong>
+          <span>${escapeHtml(archetype)}</span>
+          <span class="cast-pick">Pick this style →</span>
+        </span>
+      </button>
+    `;
+  }).join("");
+  // Click a card → jump into the generator with that style preselected
+  grid.querySelectorAll(".cast-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const sel = $("#style");
+      if (sel) {
+        sel.value = card.dataset.style;
+        state.style = card.dataset.style;
+        sel.dispatchEvent(new Event("change"));
+      }
+      revealGenerator();
+    });
+  });
+}
 
 async function loadHealth() {
   const h = await api("/api/health");
@@ -680,6 +720,7 @@ async function init() {
   loadThemes().catch(() => {});
   loadMusic().catch(() => {});
   loadDemo().catch(() => {});
+  loadCast().catch(() => {});
 }
 
 init();
