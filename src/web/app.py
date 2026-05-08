@@ -34,8 +34,14 @@ app = FastAPI(title="AI Viral Shorts Generator")
 
 # Public deploys (HF Spaces) need a password gate so strangers can't drain the free Gemini quota.
 # Local dev: leave APP_PASSWORD unset and middleware no-ops.
+#
+# Read-only file/preview endpoints are exempted because browser <img>/<video>/<audio> tags
+# can't send custom headers — gating them just breaks every preview thumbnail. They cost
+# nothing (no API calls) and require knowing the project slug or filename, so abuse risk
+# is low. The expensive *generation* endpoints (/api/ideas, /api/scene_pack, /api/images/start,
+# /api/assemble, /api/auth) stay gated.
 _AUTH_EXEMPT_PATHS = {"/", "/api/health", "/api/auth", "/favicon.ico"}
-_AUTH_EXEMPT_PREFIXES = ("/static/",)
+_AUTH_EXEMPT_PREFIXES = ("/static/", "/demo/", "/files/", "/api/music/")
 
 
 class PasswordGateMiddleware(BaseHTTPMiddleware):
