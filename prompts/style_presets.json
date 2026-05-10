@@ -35,15 +35,6 @@
     "typical_settings": "forest cottages, small-town main streets, rainy cafes, snowy cabins",
     "story_archetypes": ["fox child judged for clever ways", "owl elder shares wisdom too late", "bear father loses his job", "rabbit family flees a storm", "sheep follows the flock until they don't", "wolf misunderstood by the village", "raccoon thief turns hero", "deer mother defends fawns", "hedgehog hides a kind heart", "lion king learns humility"]
   },
-  "office_supply_head": {
-    "label": "Office supply-head",
-    "head_examples": "stapler, calculator, printer, sticky notes, paper clip, pencil, mug, monitor, hole puncher, tape dispenser",
-    "vibe": "corporate satire, cubicle drama, late-night-overtime feels",
-    "expressive_elements": "blinking cursor eyes, stapler-jaw frowns, ink-low warnings, screen glare",
-    "wardrobe_palette": "business casual, ill-fitting suits, lanyards, cardigans",
-    "typical_settings": "open-plan offices, breakrooms, conference rooms, parking garages, elevators",
-    "story_archetypes": ["intern proves the boss wrong", "old printer about to be replaced", "calculator and pencil are office best friends", "sticky note delivers anonymous love letter", "monitor witnesses something they shouldn't", "stapler unionizes the office", "mug accidentally promoted", "paperclip family on layoff day", "tape dispenser holds the team together", "office supplies stage a quiet rebellion"]
-  },
   "soldier_to_athlete": {
     "label": "Soldier → athlete journey",
     "head_examples": "soccer ball, military helmet, cleat, jersey, scholarship envelope, plane ticket, whistle, coach's clipboard, dorm key, training cone, captain's armband, passport",
