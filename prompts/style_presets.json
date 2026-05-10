@@ -44,6 +44,27 @@
     "typical_settings": "open-plan offices, breakrooms, conference rooms, parking garages, elevators",
     "story_archetypes": ["intern proves the boss wrong", "old printer about to be replaced", "calculator and pencil are office best friends", "sticky note delivers anonymous love letter", "monitor witnesses something they shouldn't", "stapler unionizes the office", "mug accidentally promoted", "paperclip family on layoff day", "tape dispenser holds the team together", "office supplies stage a quiet rebellion"]
   },
+  "soldier_to_athlete": {
+    "label": "Soldier → athlete journey",
+    "head_examples": "soccer ball, military helmet, cleat, jersey, scholarship envelope, plane ticket, whistle, coach's clipboard, dorm key, training cone, captain's armband, passport",
+    "vibe": "documentary-meets-Pixar, gritty hopeful, A24 sports drama, real stakes, earned-not-given energy",
+    "expressive_elements": "ball seams that catch the light, helmet straps that move with breath, scuffed cleat leather, sweat on a brow, paper that crinkles when read, jersey wrinkles after a hard run",
+    "wardrobe_palette": "training kits, athletic shorts and compression sleeves, olive and khaki utility tones (no flags or insignia — keep it universal), team colors of a generic college, hoodies with no logos",
+    "typical_settings": "muddy practice fields, cold pre-dawn runs, training base barracks, locker rooms with beat-up benches, recruiting visit campus walks, dorm rooms half-unpacked, airport gates with one duffel bag, coach's office with a whiteboard, family video calls on a cracked phone screen",
+    "story_archetypes": [
+      "soldier returning to the pitch for the first time after years away",
+      "100 emails sent to coaches, three replies, one chance",
+      "translating military service to an admissions officer who doesn't get it",
+      "junior college as a stepping stone, not a downgrade",
+      "first start in a foreign country, family watching on a delayed stream",
+      "reservist call-up while in the middle of a season abroad",
+      "scholarship offer pulled at the last minute, finding a backup",
+      "teammate who doesn't understand where you came from learning slowly",
+      "coach who sees the work ethic from your past life and bets on you",
+      "the moment you commit up — call home, tell them it worked"
+    ],
+    "prompt_supplement": "TONAL DNA — this is a sports-drama documentary in Pixar form. Lean hard into:\n\n**DIALOGUE STYLE**\n- Direct, tired-but-determined. Direction tags like '(quiet, breathing hard after a sprint)', '(staring at a phone screen)', '(jaw set)', '(small smile, eyes wet)', '(tight voice on a video call)'.\n- Sparse. Real athletes don't monologue mid-game. Most lines under 12 words.\n- Subtext over exposition. The character doesn't explain what they're feeling — the camera does.\n- Voice direction sometimes is just '(silent, eyes meet)' or '(deep exhale)'.\n\n**CAMERA & FRAMING**\n- Cinematic handheld. Tight on faces during emotional beats, wide for training/practice scenes.\n- Match cuts between past and present (training base run → college pitch run; barracks bunk → dorm bed).\n- Slow-motion for the moment of impact (first touch back on a ball, the moment of a key kick, a hug).\n- Lighting: cold blue dawns and overcast greys for the struggle scenes; warm golden-hour for the breakthrough beats.\n\n**STORY STRUCTURE**\n- Each reel is one chapter of a longer arc. Don't try to resolve everything in 8 scenes — end on a beat that makes the next chapter clickable.\n- Always anchor in a specific small moment, not a montage of vague time-passing. (e.g. 'the email that finally got a reply' not 'months of recruiting'.)\n- Earn the emotional payoff — show the cost first, then the reward.\n\n**WORLD DETAILS**\n- Background details that signal authenticity: tape on cleats, a worn-down water bottle, a passport on a nightstand, a cracked phone screen, a duffel bag with a faded patch.\n- Family contact happens through video calls or text bubbles, not in-person scenes (the protagonist is far from home).\n- Coaches and admissions officers are characters with their own faces — give them weight, not just exposition delivery.\n\nThis is HIS story (or any soldier-to-athlete's). The audience comes for the specifics — the small details that no one else can fake. Keep it grounded; keep it human; let the silences carry the weight."
+  },
   "office_supply_satire": {
     "label": "Office-supply (mockumentary satire)",
     "head_examples": "stapler, printer, calculator, sticky notes, paper clip, mug, computer monitor, hole puncher, tape dispenser, fax machine",
