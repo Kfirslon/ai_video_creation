@@ -60,12 +60,56 @@ class PasswordGateMiddleware(BaseHTTPMiddleware):
 app.add_middleware(PasswordGateMiddleware)
 
 
+# --- Friendly errors -------------------------------------------------------
+# The hosted demo ships without image/video credentials on purpose, so visitors
+# can browse the walkthrough without anyone's key being exposed. When a step
+# needs a key we say so plainly instead of leaking a provider stack trace.
+
+_LOCAL_HINT = (
+    "Run it locally to generate for real: clone "
+    "https://github.com/Kfirslon/ai_video_creation and start it with your own "
+    "free keys (Gemini for images, Groq for text). Takes about two minutes."
+)
+
+
+def friendly_error(exc: Exception) -> str:
+    """Turn provider errors into something a human can act on."""
+    msg = str(exc)
+    low = msg.lower()
+
+    key_invalid = (
+        "api_key_invalid" in low
+        or "api key not valid" in low
+        or "invalid api key" in low
+        or "unauthorized" in low
+        or ("401" in low and "key" in low)
+    )
+    key_missing = "not set" in low and "key" in low
+    if key_invalid or key_missing:
+        return (
+            "This hosted version is a showcase — it has no image-generation key, "
+            "so this step stops here. Everything up to it is real output. "
+            + _LOCAL_HINT
+        )
+
+    if any(s in low for s in ("429", "quota", "resource_exhausted", "rate limit")):
+        return (
+            "The free provider quota is exhausted for now. Try again later. "
+            + _LOCAL_HINT
+        )
+
+    return msg
+
+
 @app.exception_handler(Exception)
 async def all_errors(_req: Request, exc: Exception) -> JSONResponse:
     """Surface real error messages to the UI instead of opaque 500s."""
     if isinstance(exc, HTTPException):
         return JSONResponse({"error": exc.detail}, status_code=exc.status_code)
     log.error("Unhandled exception:\n%s", traceback.format_exc())
+    nice = friendly_error(exc)
+    if nice != str(exc):
+        return JSONResponse({"error": nice}, status_code=400)
     return JSONResponse(
         {"error": f"{type(exc).__name__}: {exc}", "trace": traceback.format_exc()[-1500:]},
         status_code=500,
@@ -305,7 +349,7 @@ def _images_worker(slug: str) -> None:
         state["stage"] = "videos"
         _save_state(slug, state)
     except Exception as e:
-        _job_set(slug, stage="images", status="error", error=str(e))
+        _job_set(slug, stage="images", status="error", error=friendly_error(e))
 
 
 @app.post("/api/images/start")
